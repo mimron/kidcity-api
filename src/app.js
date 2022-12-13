@@ -2,9 +2,12 @@ import "dotenv/config";
 import axios from "axios";
 import express from "express";
 import qs from "qs";
+import HttpsProxyAgent from "https-proxy-agent";
 
 import { kidcity_log } from "./logger.js";
 import { encrypt } from "./utils.js";
+
+const agent = new HttpsProxyAgent(`${process.env.TRI_PROXY}`);
 
 const app = express();
 
@@ -26,6 +29,8 @@ app.post("/kidcity/getItem", async (req, res) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       data: data,
+      httpsAgent: agent,
+      proxy: false,
     };
 
     kidcity_log.info("[request_config]", JSON.stringify(config));
@@ -83,6 +88,8 @@ app.post("/kidcity/saveTicket", async (req, res) => {
         "Content-Type": "application/x-www-form-urlencoded",
       },
       data: data,
+      httpsAgent: agent,
+      proxy: false,
     };
 
     kidcity_log.info("[request_config]", JSON.stringify(config));
