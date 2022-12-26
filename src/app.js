@@ -32,7 +32,7 @@ app.post("/kidcity/getItem", async (req, res) => {
       httpsAgent: agent,
       proxy: false,
     };
-
+    kidcity_log.info("[request_data]", JSON.stringify(data));
     kidcity_log.info("[request_config]", JSON.stringify(config));
 
     axios(config)
@@ -91,7 +91,7 @@ app.post("/kidcity/saveTicket", async (req, res) => {
       httpsAgent: agent,
       proxy: false,
     };
-
+    kidcity_log.info("[request_data]", JSON.stringify(data));
     kidcity_log.info("[request_config]", JSON.stringify(config));
 
     axios(config)
